@@ -50,8 +50,9 @@ Upper:({upper_hue}, {upper_sat}, {upper_val})
     """)
 
             cv.imshow("color", output)
-            if cv.waitKey(1) & 0xFF == ord("x"):
+            if cv.waitKey(1) & 0xFF == 27:
+                cap.release()
+                cv.destroyAllWindows()
                 break
 
-        cap.release()
-        cv.destroyAllWindows()
+        

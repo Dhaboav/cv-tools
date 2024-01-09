@@ -42,7 +42,7 @@ class ChoiceDialog:
 
     def button_click(self, choice):
         self.choice = choice
-        if choice:
+        if choice != 'Pilih warna':
             self.get_folder_path()
         self.popup.destroy()
 
