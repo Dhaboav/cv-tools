@@ -1,31 +1,27 @@
 import numpy as np
-import os
 import time
 import cv2 as cv
 import tkinter as tk
 from tkinter import messagebox
-from directory import Dir
+from .Storage import Dir
 
 
-class RealTime:
-    def __init__(self, camera, chessboard_size, square_size):
+class RealTimeCalibrate:
+    def __init__(self, camera, chessboard_size, square_size, folder_path):
         # GUI
         self.root = tk.Tk()
         self.root.withdraw()
 
-        # Dir stuff
-        self.output = os.path.join('runs', 'take_data')
-        self.folder_name = 'kalibrasi'
-
         self.directory = Dir()
-        self.base_folder_path = self.directory.check_folder(self.output, self.folder_name)
+        self.folder_path = folder_path
         self.interval = 3
         self.start_time = time.time()
+
 
         # Camera
         self.camera = cv.VideoCapture(camera, cv.CAP_DSHOW)
         if not self.camera.isOpened():
-            messagebox.showerror('Error', 'Failed to open the camera. Exiting...')
+            messagebox.showerror('Error','Failed to open the camera. Exiting...')
             exit()
 
         # Chessboard stuff
@@ -63,28 +59,28 @@ class RealTime:
             if (key == 13 or (time.time() - self.start_time) > self.interval) and ret:  # Enter
                 self.imgPoints.append(corner_subpix)
                 self.objPoints.append(self.objp)
-                self.directory.save_img(resize, self.capture_count, self.base_folder_path)
+                self.directory.save_img(resize, self.capture_count, self.folder_path)
                 self.capture_count += 1
 
             if key == 120:  # X
-                if messagebox.askyesno('Dialog', 'End capture and do calibration?'):
+                if messagebox.askyesno('Confirm', 'End capture and do calibration?'):
+                    self.camera.release()
                     cv.destroyAllWindows()
                     break
 
             if key == 27:  # ESC
-                if messagebox.askyesno('Dialog', 'Exit the program?'):
+                if messagebox.askyesno('Confirm', 'Exit the program?'):
                     self.camera.release()
                     cv.destroyAllWindows()
                     exit()
 
         if len(self.imgPoints) > 0:
-            # Compute camera parameters
-            print('calibrateCamera() start')
+            cv.destroyAllWindows()
+            messagebox.showinfo('Info', 'calibrateCamera() start')
 
-            h, w = resize.shape[:2]
-            
+            h, w = resize.shape[:2] 
             ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(self.objPoints, self.imgPoints, (w, h), None, None)
-            self.directory.save_data_calibration(mtx, dist, self.base_folder_path)
+            self.directory.save_data_calibration(mtx, dist, self.folder_path)
             self.mtx = mtx
             self.dist = dist
 
@@ -95,7 +91,7 @@ class RealTime:
                 error = cv.norm(self.imgPoints[i], image_points2, cv.NORM_L2) / len(image_points2)
                 mean_error += error
 
-            messagebox.showinfo('Total Error', mean_error / len(self.objPoints))
+            messagebox.showinfo('Info', mean_error / len(self.objPoints))
         else:
             messagebox.showerror('Error', 'No chessboard corner detected!')
             self.camera.release()
@@ -103,5 +99,6 @@ class RealTime:
             exit()
     
 
+        messagebox.showinfo('Info', 'Done!')
         self.camera.release()
         cv.destroyAllWindows()

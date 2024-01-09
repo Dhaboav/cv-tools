@@ -1,8 +1,8 @@
 import cv2 as cv
-from directory import Dir
+from backend.Storage import Dir
 
 
-class Calibrate:
+class Test:
     def __init__(self, camera, width, height, path) -> None:
         # Camera
         self.camera = camera
