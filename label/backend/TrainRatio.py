@@ -2,30 +2,14 @@ import os
 import random
 
 class TrainRatio:
-    def __init__(self, dataset_path):
-        self.dataset_path = dataset_path
-        self.result_path = os.path.join('runs', 'label')
-        self.folder_name = 'Main'
-        self.folder_path = self.checking_folder_name()
+    def __init__(self, folder_path):
+        self.folder_path = folder_path
+        self.output_path = os.path.join(folder_path, 'Ratio')
+        os.makedirs(self.output_path, exist_ok=True)
 
     # Directory Stuff
-    def checking_folder_name(self):
-        folder = os.path.join(self.result_path, self.folder_name)
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-            return folder
-
-        folder_count = 2
-        while True:
-            new_folder_name = f'{self.folder_name}{folder_count}'
-            folder = os.path.join(self.result_path, new_folder_name)
-            if not os.path.exists(folder):
-                os.makedirs(folder)
-                return folder
-            folder_count += 1
-
     def save_to_file(self, data, file_name):
-        save = os.path.join(self.folder_path)
+        save = os.path.join(self.output_path)
         with open(os.path.join(save, file_name), 'w') as file:
             for item in data:
                 file.write('%s\n' % item)
@@ -33,7 +17,7 @@ class TrainRatio:
 
     # Core         
     def run(self):
-        file_names = [os.path.splitext(f)[0] for f in os.listdir(self.dataset_path) if os.path.isfile(os.path.join(self.dataset_path, f))]
+        file_names = [os.path.splitext(f)[0] for f in os.listdir(self.folder_path) if os.path.isfile(os.path.join(self.folder_path, f))]
         random.shuffle(file_names)
 
         num_samples = len(file_names)
