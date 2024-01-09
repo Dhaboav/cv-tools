@@ -4,28 +4,12 @@ import sys
 
 
 class ConvertXML2YOLO:
-    def __init__(self, xml_folder_path, class_mapping):
-        self.xml_folder  = xml_folder_path
+    def __init__(self, folder_path, class_mapping):
+        self.xml_folder  = folder_path
         self.classes     = class_mapping
-        self.yolo_folder = os.path.join('runs', 'convert')
-        self.folder_name = 'exp'
-        self.folder_path = self.checking_folder_name()
-    
-    # Directory Stuff
-    def checking_folder_name(self):
-        folder = os.path.join(self.yolo_folder, self.folder_name)
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-            return folder
+        self.output_path = os.path.join(folder_path, 'Convert')
+        os.makedirs(self.output_path, exist_ok=True)
 
-        folder_count = 2
-        while True:
-            new_folder_name = f'{self.folder_name}{folder_count}'
-            folder = os.path.join(self.yolo_folder, new_folder_name)
-            if not os.path.exists(folder):
-                os.makedirs(folder)
-                return folder
-            folder_count += 1
     # ==============================================================================
 
     # Core
@@ -61,11 +45,11 @@ class ConvertXML2YOLO:
         for xml_file in os.listdir(self.xml_folder):
             if xml_file.endswith('.xml'):
                 xml_path = os.path.join(self.xml_folder, xml_file)
-                save = os.path.join(self.folder_path, xml_file.replace('.xml', '.txt'))
+                save = os.path.join(self.output_path, xml_file.replace('.xml', '.txt'))
                 self.xml_to_yolo(xml_path, save)
 
                 # Print out progress bar
                 progress_count += 1
                 progress = int((progress_count / total_xml) * 40)
-                sys.stdout.write('\r[' + '.' * progress + ' ' * (40 - progress) + f'] {progress_count}/{total_xml}')
+                sys.stdout.write('\r[' + '.' * progress + ' ' * (40 - progress) + f'] {progress_count}/{total_xml-1}')
                 sys.stdout.flush()
