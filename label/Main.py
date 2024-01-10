@@ -3,6 +3,7 @@ from frontend.Interface import ChoiceDialog
 from backend.TrainRatio import TrainRatio
 from backend.Convert import ConvertXML2YOLO
 from backend.LabelXml import LabelCheckXML
+from backend.LabelYolo import LabelCheckYOLO
 
 
 if __name__ == "__main__":
@@ -11,15 +12,22 @@ if __name__ == "__main__":
     choice = tester.choice
     folder_path = tester.input_path
 
+    # Data Class sesuai urutan label!
+    class_name = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
+    class_color = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (128, 128, 128)]
+    class_count = [0, 0, 0, 0]
+
     if choice == 'Cek Label XML':
         if folder_path:
+            excute = LabelCheckXML(dataset_path=folder_path, folder_name='labelXML')
+            # train_boolean --> True: Train, False: Val
+            excute.run(train_boolean=True, class_name=class_name, class_color=class_color, class_counter=class_count)
+        else:
+            msg.showerror('Error', 'No Folder Path!')
 
-            # Untuk data class sesuai urutan dari saat melakukan labeling.
-            class_name = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
-            class_color = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (255, 255, 255)]
-            class_count = [0, 0, 0, 0]
-
-            excute = LabelCheckXML(dataset_path=folder_path)
+    elif choice == 'Cek Label YOLO':
+        if folder_path:
+            excute = LabelCheckYOLO(dataset_path=folder_path, folder_name='labelYOLO')
             # train_boolean --> True: Train, False: Val
             excute.run(train_boolean=True, class_name=class_name, class_color=class_color, class_counter=class_count)
         else:

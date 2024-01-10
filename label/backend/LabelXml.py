@@ -1,19 +1,28 @@
-import cv2 as cv
-import xml.etree.ElementTree as ET
-import matplotlib.pyplot as plt
 import os
-import glob
 import sys
+import glob
+import shutil
+import cv2 as cv
+import matplotlib.pyplot as plt
+import xml.etree.ElementTree as ET
 
 
 class LabelCheckXML:
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, folder_name):
         self.dataset_path   = dataset_path
-        self.output_path    = os.path.join(dataset_path, 'LabelXML')
-        os.makedirs(self.output_path, exist_ok=True)
+        self.output_path    = os.path.join(dataset_path, folder_name)
         self.image_counter  = 0
+        self.create_output_directory()
 
     # Directory Stuff
+    def create_output_directory(self):
+        # Remove the existing directory if it exists
+        if os.path.exists(self.output_path):
+            shutil.rmtree(self.output_path)
+
+        # Create a new directory
+        os.makedirs(self.output_path)
+        
     def write_label_image(self, image, result_image):
         image_path = os.path.join(self.output_path, os.path.basename(image))
         cv.imwrite(image_path, result_image)
@@ -30,9 +39,14 @@ class LabelCheckXML:
         self.class_colors   = class_color
         self.class_counts   = class_count
 
-    def class_plt(self, total, class_name, class_number):
+    def bgr_to_rgb(self, bgr_color):
+        return (bgr_color[2] / 255.0, bgr_color[1] / 255.0, bgr_color[0] / 255.0)
+
+    def class_plt(self, total, class_name, class_number, class_color):
+        class_colors_rgb = [self.bgr_to_rgb(bgr_color) for bgr_color in class_color]
+        
         plt.title(f"Class Distribution of {total} Images")
-        plt.bar(class_name, class_number)
+        bars = plt.bar(class_name, class_number, color=class_colors_rgb)
         plt_file = os.path.join(self.output_path, 'PlotClass')
         plt.savefig(plt_file)
     # ==============================================================================
@@ -84,7 +98,7 @@ class LabelCheckXML:
                     self.class_counts[class_id] += 1
 
                 self.write_label_image(image, read_image)
-                self.class_plt(self.image_counter, self.class_names, self.class_counts)
+                self.class_plt(self.image_counter, self.class_names, self.class_counts, self.class_colors)
 
             except FileNotFoundError:
                 self.no_label(xml_file)
