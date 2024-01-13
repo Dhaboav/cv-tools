@@ -35,7 +35,7 @@ if __name__ == "__main__":
     CLASSES_NAME = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
     CLASSES_COLOR = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (128, 128, 128)]
     CLASSES_COUNTER = [0, 0, 0, 0]
-    CLASSES_MAPPING = {"0": "ROBOT", "1": "BOLA", "2": "PENGHALANG", "3": "GAWANG"}
+    CLASSES_MAPPING = {"ROBOT":"0", "BOLA":"1", "PENGHALANG":"2" , "GAWANG":"3"}
 
     if INTERFACE.choice == 'Cek Label XML':
         run_label_checker(LabelCheckXML, FOLDER_PATH, 'labelXML', CLASSES_NAME, CLASSES_COLOR, CLASSES_COUNTER)
