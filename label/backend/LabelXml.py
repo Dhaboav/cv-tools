@@ -71,14 +71,10 @@ class LabelCheckXML:
 
         return image_width, image_height, boxes
 
-    def label_to_image(self, train=True):
-        if train:
-            data_category = os.path.join(self.dataset_path, 'train', 'images', '*[jpn]*g')
-        else:
-            data_category = os.path.join(self.dataset_path, 'val', 'images', '*[jpn]*g')
-        
-        self.total_image = len(glob.glob(data_category))
-        for image in glob.glob(data_category):
+    def label_to_image(self):
+        data_path = os.path.join(self.dataset_path, 'images', '*[jpn]*g')
+        self.total_image = len(glob.glob(data_path))
+        for image in glob.glob(data_path):
             xml_file = image.replace('images', 'labels').replace(os.path.splitext(image)[1], '.xml')
             try:
                 image_width, image_height, boxes = self.read_xml(xml_file)
@@ -105,6 +101,6 @@ class LabelCheckXML:
                 continue
     # ==============================================================================
 
-    def run(self, train_boolean, class_name, class_color, class_counter):
+    def run(self, class_name, class_color, class_counter):
         self.class_data(class_name, class_color, class_counter)
-        self.label_to_image(train_boolean)
+        self.label_to_image()

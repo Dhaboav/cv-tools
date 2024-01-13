@@ -36,6 +36,7 @@ class ConvertXML2YOLO:
                 width = (xmax - xmin) / image_width
                 height = (ymax - ymin) / image_height
 
+                print(f"Class: {class_name}, YOLO: {self.classes[class_name]} {x_center} {y_center} {width} {height}")
                 write_yolo.write(f'{self.classes[class_name]} {x_center} {y_center} {width} {height}\n')
     # ==============================================================================
                 

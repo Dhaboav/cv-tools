@@ -59,6 +59,6 @@ Struktur besar dari repositori:
   ```git
    git clone https://github.com/Dhaboav/toolsCV.git
   ```
-2. Install Python dan pip lalu jalankan perintah ini  ```pip install -r Requirements.txt``` diterminal.
+2. Install Python 3.9 dan pip lalu jalankan perintah ini  ```pip install -r Requirements.txt``` diterminal.
 3. Masuk ke lokal git dan jalankan file dengan nama ```Main.py``` disetiap folder ```kalibrasi```, ```label```, ```praproses```.
 <p align="right">(<a href="#readme-top">Kembali ke atas</a>)</p>

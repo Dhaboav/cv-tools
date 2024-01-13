@@ -5,45 +5,43 @@ from backend.Convert import ConvertXML2YOLO
 from backend.LabelXml import LabelCheckXML
 from backend.LabelYolo import LabelCheckYOLO
 
+def run_label_checker(checker, dataset_path, folder_name, class_name, class_color, class_counter):
+    if dataset_path:
+        checker_instance = checker(dataset_path=dataset_path, folder_name=folder_name)
+        checker_instance.run(class_name=class_name, class_color=class_color, class_counter=class_counter)
+    else:
+        msg.showerror('Error', 'No Folder Path!')
+
+def run_xml_to_yolo_converter(folder_path, class_mapping):
+    if folder_path:
+        converter_instance = ConvertXML2YOLO(folder_path=folder_path, class_mapping=class_mapping)
+        converter_instance.run()
+    else:
+        msg.showerror('Error', 'No Folder Path!')
+
+def run_train_ratio(folder_path):
+    if folder_path:
+        trainer_instance = TrainRatio(folder_path=folder_path)
+        trainer_instance.run()
+    else:
+        msg.showerror('Error', 'No Folder Path!')
+
 
 if __name__ == "__main__":
-    tester = ChoiceDialog()
-    tester.root.wait_window(tester.popup)
-    choice = tester.choice
-    folder_path = tester.input_path
+    INTERFACE = ChoiceDialog()
+    INTERFACE.root.wait_window(INTERFACE.popup)
+    FOLDER_PATH = INTERFACE.input_path
 
-    # Data Class sesuai urutan label!
-    class_name = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
-    class_color = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (128, 128, 128)]
-    class_count = [0, 0, 0, 0]
+    CLASSES_NAME = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
+    CLASSES_COLOR = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (128, 128, 128)]
+    CLASSES_COUNTER = [0, 0, 0, 0]
+    CLASSES_MAPPING = {"0": "ROBOT", "1": "BOLA", "2": "PENGHALANG", "3": "GAWANG"}
 
-    if choice == 'Cek Label XML':
-        if folder_path:
-            excute = LabelCheckXML(dataset_path=folder_path, folder_name='labelXML')
-            # train_boolean --> True: Train, False: Val
-            excute.run(train_boolean=True, class_name=class_name, class_color=class_color, class_counter=class_count)
-        else:
-            msg.showerror('Error', 'No Folder Path!')
-
-    elif choice == 'Cek Label YOLO':
-        if folder_path:
-            excute = LabelCheckYOLO(dataset_path=folder_path, folder_name='labelYOLO')
-            # train_boolean --> True: Train, False: Val
-            excute.run(train_boolean=True, class_name=class_name, class_color=class_color, class_counter=class_count)
-        else:
-            msg.showerror('Error', 'No Folder Path!')
-
-    elif choice == 'Konversi XML ke YOLO':
-        if folder_path:
-            class_mapping = {"0": "ROBOT", "1": "BOLA", "2": "PENGHALANG", "3": "GAWANG"}
-            excute = ConvertXML2YOLO(folder_path=folder_path, class_mapping=class_mapping)
-            excute.run()
-        else:
-            msg.showerror('Error', 'No Folder Path!')
-
-    elif choice == 'Train Rasio SSD Mobilenet':
-        if folder_path:
-            excute = TrainRatio(folder_path=folder_path)
-            excute.run()
-        else:
-            msg.showerror('Error', 'No Folder Path!')
+    if INTERFACE.choice == 'Cek Label XML':
+        run_label_checker(LabelCheckXML, FOLDER_PATH, 'labelXML', CLASSES_NAME, CLASSES_COLOR, CLASSES_COUNTER)
+    elif INTERFACE.choice == 'Cek Label YOLO':
+        run_label_checker(LabelCheckYOLO, FOLDER_PATH, 'labelYOLO', CLASSES_NAME, CLASSES_COLOR, CLASSES_COUNTER)
+    elif INTERFACE.choice == 'Konversi XML ke YOLO':
+        run_xml_to_yolo_converter(FOLDER_PATH, CLASSES_MAPPING)
+    elif INTERFACE.choice == 'Train Rasio SSD Mobilenet':
+        run_train_ratio(FOLDER_PATH)

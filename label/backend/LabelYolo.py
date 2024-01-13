@@ -12,14 +12,10 @@ class LabelCheckYOLO(LabelCheckXML):
         x_max, y_max = int((x + width / 2) * image_width), int((y + height / 2) * image_height)
         return x_min, y_min, x_max, y_max
     
-    def label_to_image(self, train=True):
-        if train:
-             data_category = os.path.join(self.dataset_path, 'train', 'images', '*[jpn]*g')
-        else:
-             data_category = os.path.join(self.dataset_path, 'val', 'images', '*[jpn]*g')
-        
-        self.total_image = len(glob.glob(data_category))
-        for image in glob.glob( data_category):
+    def label_to_image(self):
+        data_path = os.path.join(self.dataset_path, 'images', '*[jpn]*g')
+        self.total_image = len(glob.glob(data_path))
+        for image in glob.glob( data_path):
             yolo_file = image.replace('images', 'labels').replace(os.path.splitext(image)[1], '.txt')
             try:
                 with open(yolo_file, "r") as label:
@@ -42,7 +38,7 @@ class LabelCheckYOLO(LabelCheckXML):
                         self.class_counts[class_id] += 1
 
                     self.write_label_image(image, read_image)
-                    self.class_plt(self.image_counter, self.class_names, self.class_counts)
+                    self.class_plt(self.image_counter, self.class_names, self.class_counts, self.class_colors)
 
             except FileNotFoundError:
                 self.no_label(yolo_file)
