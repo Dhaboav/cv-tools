@@ -4,6 +4,7 @@ from backend.TrainRatio import TrainRatio
 from backend.Convert import ConvertXML2YOLO
 from backend.LabelXml import LabelCheckXML
 from backend.LabelYolo import LabelCheckYOLO
+from variable import CLASSES_NAME, CLASSES_COLOR, CLASSES_COUNTER, CLASSES_MAPPING
 
 def run_label_checker(checker, dataset_path, folder_name, class_name, class_color, class_counter):
     if dataset_path:
@@ -31,11 +32,6 @@ if __name__ == "__main__":
     INTERFACE = ChoiceDialog()
     INTERFACE.root.wait_window(INTERFACE.popup)
     FOLDER_PATH = INTERFACE.input_path
-
-    CLASSES_NAME = ["ROBOT", "BOLA", "PENGHALANG", "GAWANG"]
-    CLASSES_COLOR = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (128, 128, 128)]
-    CLASSES_COUNTER = [0, 0, 0, 0]
-    CLASSES_MAPPING = {"ROBOT":"0", "BOLA":"1", "PENGHALANG":"2" , "GAWANG":"3"}
 
     if INTERFACE.choice == 'Cek Label XML':
         run_label_checker(LabelCheckXML, FOLDER_PATH, 'labelXML', CLASSES_NAME, CLASSES_COLOR, CLASSES_COUNTER)
