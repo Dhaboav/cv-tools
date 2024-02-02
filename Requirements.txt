@@ -1,5 +1,5 @@
 # toolsCV requirements
-# Usage: pip install -r Requirements.txt
+# Usage: pip install -r requirements.txt
 
 # Base ------------------------------------------------------------------------
 opencv-python>=4.8.0.74

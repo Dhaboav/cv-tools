@@ -28,25 +28,25 @@
 Struktur besar dari repositori:
 ```
 . 
-├── kalibrasi
+├── Kalibrasi
 |   |
 |   ├── backend
 |   ├── frontend
-|   └── Main.py
+|   └── main.py
 |
-├── label
+├── Label
 |   |
 |   ├── backend
 |   ├── frontend
-|   └── Main.py
+|   └── main.py
 |
-├── praproses
+├── Praproses
 |   |
 |   ├── backend
 |   ├── frontend
-|   └── Main.py
+|   └── main.py
 |
-├── Requirements.txt
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```

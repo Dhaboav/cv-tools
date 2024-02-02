@@ -3,6 +3,7 @@ from frontend.Message import CustomPopup
 from backend.ImageCalibrate import ImageCalibrate
 from backend.RealTimeCalibrate import RealTimeCalibrate
 from backend.Test import Test
+from variable import *
 
 if __name__ == "__main__":
     tester = ChoiceDialog()
