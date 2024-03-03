@@ -2,8 +2,7 @@ import tkinter.messagebox as msg
 from frontend.Interface import ChoiceDialog
 from backend.TakeImg import TakeImg
 from backend.ColorSelector import Color
-from backend.ChangeName import ChangeName
-from variable import CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT, NAME_FORMATING
+from variable import CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT
 
 
 if __name__ == "__main__":
@@ -22,11 +21,3 @@ if __name__ == "__main__":
     elif choice == 'Pilih warna':
         excute = Color(camera=CAMERA_INDEX, width=CAMERA_WIDTH, height=CAMERA_HEIGHT)
         excute.run()
-
-    elif choice == 'Ubah nama':
-        if folder_path:
-            # example of name format -> test-{}.jpg
-            excute = ChangeName(folder_path=folder_path, name_format=NAME_FORMATING)
-            excute.run()
-        else:
-            msg.showerror('Error', 'No Folder Path!')

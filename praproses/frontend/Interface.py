@@ -25,7 +25,7 @@ class ChoiceDialog:
     def popup_component(self, GUI):
         info = Label(GUI, text="Pilih Operasi Yang ingin dilakukan:")
         info.pack(pady=5)
-        choices = ['Ambil gambar', 'Pilih warna', 'Ubah nama']
+        choices = ['Ambil gambar', 'Pilih warna']
 
         # button setting
         button_frame = Frame(GUI)
