@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 
-class Color:
+class ColorPicker:
     def __init__(self, camera, width, height):
         self.camera = camera
         self.width = width
@@ -54,5 +54,3 @@ Upper:({upper_hue}, {upper_sat}, {upper_val})
                 cap.release()
                 cv.destroyAllWindows()
                 break
-
-        

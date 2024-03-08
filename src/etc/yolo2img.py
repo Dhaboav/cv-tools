@@ -2,10 +2,10 @@ import os
 import sys
 import glob
 import cv2 as cv
-from .LabelXml import LabelCheckXML
+from .xml2img import XML2Img
 
 
-class LabelCheckYOLO(LabelCheckXML):
+class YOLO2Img(XML2Img):
 
     def yolo_to_opencv(self, x, y, width, height, image_width, image_height):
         x_min, y_min = int((x - width / 2) * image_width), int((y - height / 2) * image_height)

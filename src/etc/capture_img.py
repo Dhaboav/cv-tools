@@ -3,7 +3,7 @@ import os
 import time
 
 
-class TakeImg:
+class CaptureImg:
     def __init__(self, camera_index, camera_size, folder_path):
         self.camera_index = camera_index
         self.width = camera_size[0]
@@ -22,9 +22,10 @@ class TakeImg:
         self.capture_count += 1
 
     def run(self):
-        camera = cv.VideoCapture(self.camera_index)
+        camera = cv.VideoCapture(self.camera_index, cv.CAP_DSHOW)
         camera.set(3, self.width)
         camera.set(4, self.height)
+        camera.set(cv.CAP_PROP_AUTOFOCUS, 0)
 
         while True:
             ret, frame = camera.read()

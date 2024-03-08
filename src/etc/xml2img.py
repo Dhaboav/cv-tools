@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import xml.etree.ElementTree as ET
 
 
-class LabelCheckXML:
+class XML2Img:
     def __init__(self, dataset_path, folder_name):
         self.dataset_path   = dataset_path
         self.output_path    = os.path.join(dataset_path, folder_name)

@@ -3,7 +3,7 @@ import os
 import sys
 
 
-class ConvertXML2YOLO:
+class XML2YOLO:
     def __init__(self, folder_path, class_mapping):
         self.xml_folder  = folder_path
         self.classes     = class_mapping

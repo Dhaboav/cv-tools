@@ -1,7 +1,7 @@
 import os
 import random
 
-class TrainRatio:
+class ImgSet:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         self.output_path = os.path.join(folder_path, 'Ratio')
