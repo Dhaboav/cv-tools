@@ -29,7 +29,6 @@ class Controller:
             custom_dialog.run()
             try:
                 __paths = custom_dialog.paths
-                print(__paths)
                 if __paths:
                     XML2Img(__paths[0], __paths[1], self.__model.get_class_name(), self.__model.get_class_color(), self.__model.get_class_counter())
                     self.show_info_dialog('System Info', 'XML checking done')

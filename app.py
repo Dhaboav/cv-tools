@@ -1,4 +1,4 @@
-from mvc.view import View
+from src.mvc.view import View
 from src.mvc.controller import Controller
 
 
