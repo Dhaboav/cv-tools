@@ -8,8 +8,10 @@ sys.path.append(str(parent_folder))
 
 from mvc.view import View
 from mvc.model import Model
-from etc.custom_dialog import CustomDialog
 from etc.xml2img import XML2Img
+from etc.xml2yolo import XML2YOLO
+from etc.custom_dialog import CustomDialog
+from etc.single_dialog import SingleDialog
 
 
 class Controller:
@@ -36,7 +38,15 @@ class Controller:
         elif __result == 'yoloLabel':
             pass 
         elif __result == 'convert':
-            pass
+            __popup = SingleDialog(root=self.__master)
+            try:
+                __path = __popup.paths
+                if __path:
+                    XML2YOLO(__path, self.__model.get_class_mapping())
+                    self.__view.show_info_dialog('System Info', 'XML2YOLO converting done')
+            except AttributeError:
+                self.__view.show_error_dialog('System Error', 'No Folder Path!')
+                
         elif __result == 'imgset':
             pass
         elif __result == 'capture':

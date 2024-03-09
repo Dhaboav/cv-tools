@@ -11,6 +11,7 @@ class Model:
         self.__class_name = ['ROBOT', 'BOLA', 'PENGHALANG', 'GAWANG']
         self.__class_color = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (255, 0, 255)]
         self.__class_counter = [0, 0, 0, 0]
+        self.__class_mapping = {'ROBOT':'0', 'BOLA':'1', 'PENGHALANG':'2', 'GAWANG':'3'}
 
     # Getter
     def get_menu(self, menu_id) -> str:
@@ -24,3 +25,6 @@ class Model:
     
     def get_class_counter(self) -> list:
         return self.__class_counter
+    
+    def get_class_mapping(self) -> dict:
+        return self.__class_mapping
