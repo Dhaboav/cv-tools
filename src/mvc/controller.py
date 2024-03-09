@@ -8,6 +8,7 @@ sys.path.append(str(parent_folder))
 
 from mvc.view import View
 from mvc.model import Model
+from etc.imgset import ImgSet
 from etc.xml2img import XML2Img
 from etc.xml2yolo import XML2YOLO
 from etc.custom_dialog import CustomDialog
@@ -48,7 +49,15 @@ class Controller:
                 self.__view.show_error_dialog('System Error', 'No Folder Path!')
                 
         elif __result == 'imgset':
-            pass
+            __popup = SingleDialog(root=self.__master)
+            try:
+                __path = __popup.paths
+                if __path:
+                    __imgset = ImgSet(__path)
+                    self.__view.show_info_dialog('System Info', f'Done spliting {__imgset.total} labels')
+            except AttributeError:
+                self.__view.show_error_dialog('System Error', 'No Folder Path!')
+
         elif __result == 'capture':
             pass
         elif __result == 'color':

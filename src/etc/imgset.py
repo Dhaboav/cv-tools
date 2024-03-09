@@ -2,22 +2,23 @@ import os
 import random
 
 class ImgSet:
-    def __init__(self, folder_path):
-        self.folder_path = folder_path
-        self.output_path = os.path.join(folder_path, 'Ratio')
-        os.makedirs(self.output_path, exist_ok=True)
+    def __init__(self, label_path:str):
+        self.__label_path = label_path
+        self.__output_path = 'runs/ImageSets'
+        os.makedirs(self.__output_path, exist_ok=True)
+        self.__run()
 
     # Directory Stuff
-    def save_to_file(self, data, file_name):
-        save = os.path.join(self.output_path)
-        with open(os.path.join(save, file_name), 'w') as file:
+    def __save_to_file(self, data, file_name):
+        __save = os.path.join(self.__output_path)
+        with open(os.path.join(__save, file_name), 'w') as file:
             for item in data:
                 file.write('%s\n' % item)
     # ==============================================================================
 
     # Core         
-    def run(self):
-        file_names = [os.path.splitext(f)[0] for f in os.listdir(self.folder_path) if os.path.isfile(os.path.join(self.folder_path, f))]
+    def __run(self):
+        file_names = [os.path.splitext(f)[0] for f in os.listdir(self.__label_path) if os.path.isfile(os.path.join(self.__label_path, f))]
         random.shuffle(file_names)
 
         num_samples = len(file_names)
@@ -30,13 +31,13 @@ class ImgSet:
         test_set = file_names[num_train + num_val:]
 
         # Save the sets into separate text files
-        self.save_to_file(train_set, 'train.txt')
-        self.save_to_file(val_set, 'val.txt')
-        self.save_to_file(test_set, 'test.txt')
+        self.__save_to_file(train_set, 'train.txt')
+        self.__save_to_file(val_set, 'val.txt')
+        self.__save_to_file(test_set, 'test.txt')
 
         # Create trainval.txt by combining items from train.txt and val.txt
         trainval_set = train_set + val_set
-        self.save_to_file(trainval_set, 'trainval.txt')
+        self.__save_to_file(trainval_set, 'trainval.txt')
 
         # Printout
-        print(f'Done split {len(file_names)} datas')
+        self.total = len(file_names)
