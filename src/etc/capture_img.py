@@ -10,6 +10,7 @@ class CaptureImg:
         self.height = camera_size[1]
 
         self.folder_path = 'runs/capture'
+        os.makedirs(self.folder_path, exist_ok=True)
         self.capture_count = 0
         
         self.interval = 5

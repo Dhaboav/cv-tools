@@ -48,5 +48,5 @@ class XML2YOLO:
                 # Print out progress bar
                 __progress_count += 1
                 __progress = int((__progress_count / __total_xml) * 40)
-                sys.stdout.write('\r[' + '.' * __progress + ' ' * (40 - __progress) + f'] {__progress_count}/{__total_xml}')
+                sys.stdout.write('\r[' + '.' * __progress + ' ' * (40 - __progress) + f'] {__progress_count}/{__total_xml-1}')
                 sys.stdout.flush()
