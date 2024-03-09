@@ -22,7 +22,6 @@ Struktur besar dari repositori:
 |
 ├── .gitignore
 ├── app.py
-├── config.json
 ├── README.md
 └── requirements.txt
 ```

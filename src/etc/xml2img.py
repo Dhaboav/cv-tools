@@ -8,9 +8,10 @@ import xml.etree.ElementTree as ET
 
 
 class XML2Img:
-    def __init__(self, dataset_path, folder_name):
+    def __init__(self, dataset_path, label_path):
         self.dataset_path   = dataset_path
-        self.output_path    = os.path.join(dataset_path, folder_name)
+        self.label_path     = label_path
+        self.output_path    = 'runs/xml'
         self.image_counter  = 0
         self.create_output_directory()
 
@@ -28,7 +29,7 @@ class XML2Img:
         cv.imwrite(image_path, result_image)
 
     def no_label(self, missing_label):
-        log_file = os.path.join(self.output_path, 'NoLabel.txt')
+        log_file = os.path.join(self.output_path, 'no_label.txt')
         with open(log_file, 'a') as file:
             file.write('\n' + missing_label)
     # ==============================================================================
@@ -72,10 +73,12 @@ class XML2Img:
         return image_width, image_height, boxes
 
     def label_to_image(self):
-        data_path = os.path.join(self.dataset_path, 'images', '*[jpn]*g')
+        data_path = os.path.join(self.dataset_path, '*[jpn]*g')
         self.total_image = len(glob.glob(data_path))
+        
         for image in glob.glob(data_path):
-            xml_file = image.replace('images', 'labels').replace(os.path.splitext(image)[1], '.xml')
+            image_filename = os.path.basename(image)
+            xml_file = os.path.join(self.label_path, image_filename[:-4] + '.xml')
             try:
                 image_width, image_height, boxes = self.read_xml(xml_file)
                 read_image = cv.imread(image)
