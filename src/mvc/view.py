@@ -54,3 +54,6 @@ class View:
 
     def show_info_dialog(self, title:str, message:str):
         messagebox.showinfo(title, message)
+
+    def show_error_dialog(self, title:str, message:str):
+        messagebox.showerror(title, message)

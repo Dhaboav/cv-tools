@@ -23,14 +23,15 @@ class Controller:
         __result = self.__model.get_menu(menu_id)
         if __result == 'xmlLabel':
             __popup = CustomDialog(root=self.__master)
-            __paths = __popup.paths
-            if __paths:
-                __data, __label = __paths
-                t = XML2Img(__data, __label)
-                t.run(class_name=self.__model.get_class_name(),
-                      class_color=self.__model.get_class_color(),
-                      class_counter=self.__model.get_class_counter())
-                self.__view.show_info_dialog('System Info', 'XML checking done')
+            try:
+                __paths = __popup.paths
+                if __paths:
+                    __data, __label = __paths
+                    XML2Img(__data, __label, self.__model.get_class_name(), 
+                            self.__model.get_class_color(), self.__model.get_class_counter())
+                    self.__view.show_info_dialog('System Info', 'XML checking done')
+            except AttributeError:
+                self.__view.show_error_dialog('System Error', 'No Folder Path!')
                 
         elif __result == 'yoloLabel':
             pass 
