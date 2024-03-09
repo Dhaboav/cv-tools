@@ -4,12 +4,12 @@ import time
 
 
 class CaptureImg:
-    def __init__(self, camera_index, camera_size, folder_path):
+    def __init__(self, camera_index, camera_size):
         self.camera_index = camera_index
         self.width = camera_size[0]
         self.height = camera_size[1]
 
-        self.folder_path = folder_path
+        self.folder_path = 'runs/capture'
         self.capture_count = 0
         
         self.interval = 5

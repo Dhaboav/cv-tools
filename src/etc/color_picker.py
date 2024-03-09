@@ -3,10 +3,10 @@ import numpy as np
 
 
 class ColorPicker:
-    def __init__(self, camera, width, height):
+    def __init__(self, camera, camera_size):
         self.camera = camera
-        self.width = width
-        self.height = height
+        self.width = camera_size[0]
+        self.height = camera_size[1]
 
     @staticmethod
     def empty(x):

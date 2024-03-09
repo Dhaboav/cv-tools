@@ -12,6 +12,8 @@ from etc.imgset import ImgSet
 from etc.xml2img import XML2Img
 from etc.yolo2img import YOLO2Img
 from etc.xml2yolo import XML2YOLO
+from etc.capture_img import CaptureImg
+from etc.color_picker import ColorPicker
 from etc.custom_dialog import CustomDialog
 from etc.single_dialog import SingleDialog
 
@@ -68,6 +70,7 @@ class Controller:
                 self.__view.show_error_dialog('System Error', 'No Folder Path!')
 
         elif __result == 'capture':
-            pass
+            CaptureImg(self.__model.get_index(), (self.__model.get_width(), self.__model.get_height()))
+
         elif __result == 'color':
-            pass
+            ColorPicker(self.__model.get_index(), (self.__model.get_width(), self.__model.get_height()))
