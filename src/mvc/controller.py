@@ -10,6 +10,7 @@ from mvc.view import View
 from mvc.model import Model
 from etc.imgset import ImgSet
 from etc.xml2img import XML2Img
+from etc.yolo2img import YOLO2Img
 from etc.xml2yolo import XML2YOLO
 from etc.custom_dialog import CustomDialog
 from etc.single_dialog import SingleDialog
@@ -29,15 +30,23 @@ class Controller:
             try:
                 __paths = __popup.paths
                 if __paths:
-                    __data, __label = __paths
-                    XML2Img(__data, __label, self.__model.get_class_name(), 
-                            self.__model.get_class_color(), self.__model.get_class_counter())
+                    XML2Img(__paths[0], __paths[1], self.__model.get_class_name(), self.__model.get_class_color(), self.__model.get_class_counter())
                     self.__view.show_info_dialog('System Info', 'XML checking done')
             except AttributeError:
                 self.__view.show_error_dialog('System Error', 'No Folder Path!')
                 
         elif __result == 'yoloLabel':
-            pass 
+            __popup = CustomDialog(root=self.__master)
+            try:
+                __paths = __popup.paths
+                if __paths:
+                    YOLO2Img(__paths[0], __paths[1], self.__model.get_class_name(), 
+                            self.__model.get_class_color(), self.__model.get_class_counter())
+                
+                    self.__view.show_info_dialog('System Info', 'YOLO checking done')      
+            except AttributeError:
+                self.__view.show_error_dialog('System Error', 'No Folder Path!')
+
         elif __result == 'convert':
             __popup = SingleDialog(root=self.__master)
             try:
