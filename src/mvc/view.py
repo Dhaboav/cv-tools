@@ -17,14 +17,14 @@ class View:
         screen_height = self.popup.winfo_screenheight()
         x = (screen_width - 200) // 2
         y = (screen_height - 200) // 2
-        self.popup.geometry(f'320x240+{x}+{y}')
+        self.popup.geometry(f'320x260+{x}+{y}')
         self.popup.resizable(False, False)
         self.popup_component(GUI=self.popup)
 
     def popup_component(self, GUI):
         info = Label(GUI, text='Pilih Operasi:')
         info.pack(pady=5)
-        choices = ['XML', 'YOLO', 'XML2YOLO', 'Imgsets', 'Capture', 'Color']
+        choices = ['XML', 'YOLO', 'XML2YOLO', 'Imgsets', 'Capture', 'Color', 'Ubah']
 
         # button setting
         button_frame = Frame(GUI)

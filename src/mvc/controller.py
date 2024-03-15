@@ -12,6 +12,8 @@ from etc.imgset import ImgSet
 from etc.xml2img import XML2Img
 from etc.yolo2img import YOLO2Img
 from etc.xml2yolo import XML2YOLO
+from etc.file_change import FileChange
+from etc.name_dialog import NameDialog
 from etc.capture_img import CaptureImg
 from etc.color_picker import ColorPicker
 from etc.custom_dialog import CustomDialog
@@ -70,12 +72,25 @@ class Controller:
             except AttributeError:
                 self.show_error_dialog('System Error', 'No Folder Path!')
 
-        if choice == 'Capture':
+        elif choice == 'Capture':
             c = CaptureImg(self.__model.get_index(), (self.__model.get_width(), self.__model.get_height()))
             c.run()
+
         elif choice == 'Color':
             c= ColorPicker(self.__model.get_index(), (self.__model.get_width(), self.__model.get_height()))
             c.run()
+
+        elif choice == 'Ubah':
+            name_dialog = NameDialog()
+            name_dialog.run()
+            try:
+                __path = name_dialog.paths
+                if __path:
+                    __file_changer = FileChange(__path[0]+'{}', __path[1])
+                    __file_changer.run()
+                    self.show_info_dialog('System Info', f'Done Changed {__file_changer.counter} files')
+            except AttributeError:
+                self.show_error_dialog('System Error', 'No Folder Path!')
 
     def show_info_dialog(self, title:str, message:str):
         messagebox.showinfo(title, message)

@@ -1,3 +1,5 @@
+from mvc.data import INDEX
+
 class Model:
     def __init__(self) -> None:
         self.__class_name = ['ROBOT', 'BOLA', 'PENGHALANG', 'GAWANG']
@@ -5,7 +7,7 @@ class Model:
         self.__class_counter = [0, 0, 0, 0]
         self.__class_mapping = {'ROBOT':'0', 'BOLA':'1', 'PENGHALANG':'2', 'GAWANG':'3'}
 
-        self.__index = 0
+        self.__index = INDEX
         self.__width = 640
         self.__height = 480
 
