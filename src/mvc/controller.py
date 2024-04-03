@@ -80,15 +80,15 @@ class Controller:
             c= ColorPicker(self.__model.get_index(), (self.__model.get_width(), self.__model.get_height()))
             c.run()
 
-        elif choice == 'Ubah':
+        elif choice == 'File':
             name_dialog = NameDialog()
             name_dialog.run()
             try:
                 __path = name_dialog.paths
                 if __path:
-                    __file_changer = FileChange(__path[0]+'{}', __path[1])
+                    __file_changer = FileChange(__path[0]+'{}', __path[1], self.__model.get_file_counter())
                     __file_changer.run()
-                    self.show_info_dialog('System Info', f'Done Changed {__file_changer.counter} files')
+                    self.show_info_dialog('System Info', f'Done Changed {__file_changer.file} files')
             except AttributeError:
                 self.show_error_dialog('System Error', 'No Folder Path!')
 

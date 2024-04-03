@@ -19,7 +19,7 @@ Struktur besar dari repositori:
 ├── src
 |   ├── etc (Properties)
 |   └── mvc (Architecture)
-|       └── include data.py
+|       └── termasuk file data.py
 |
 ├── .gitignore
 ├── app.py

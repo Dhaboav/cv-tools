@@ -1,4 +1,6 @@
 from mvc.data import INDEX
+from mvc.data import COUNTER
+
 
 class Model:
     def __init__(self) -> None:
@@ -6,10 +8,12 @@ class Model:
         self.__class_color = [(0, 255, 0), (0, 140, 255), (0, 0, 255), (255, 0, 255)]
         self.__class_counter = [0, 0, 0, 0]
         self.__class_mapping = {'ROBOT':'0', 'BOLA':'1', 'PENGHALANG':'2', 'GAWANG':'3'}
-
+        # Kamera
         self.__index = INDEX
         self.__width = 640
         self.__height = 480
+        # File counter
+        self.__file_counter = COUNTER
 
     # Getter
     def get_class_name(self) -> list:
@@ -32,3 +36,6 @@ class Model:
     
     def get_height(self) -> int:
         return self.__height
+    
+    def get_file_counter(self) -> int:
+        return self.__file_counter

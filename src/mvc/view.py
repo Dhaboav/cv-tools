@@ -24,7 +24,7 @@ class View:
     def popup_component(self, GUI):
         info = Label(GUI, text='Pilih Operasi:')
         info.pack(pady=5)
-        choices = ['XML', 'YOLO', 'XML2YOLO', 'Imgsets', 'Capture', 'Color', 'Ubah']
+        choices = ['XML', 'YOLO', 'XML2YOLO', 'Imgsets', 'Capture', 'Color', 'File']
 
         # button setting
         button_frame = Frame(GUI)
