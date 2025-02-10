@@ -1,10 +1,3 @@
-# toolsCV requirements
-# Usage: pip install -r requirements.txt
-
 # Base ------------------------------------------------------------------------
-opencv-python>=4.8.0.74
-matplotlib>=3.7
-numpy>=1.25.0
-
-# Extra need python version 3.9-------------------------------------------------
-labelImg>=1.8.6
+opencv-python==4.11.0.86
+matplotlib==3.10.0

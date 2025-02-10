@@ -1,18 +1,18 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog
+from tkinter import filedialog, messagebox
 
 
 class NameDialog:
     def __init__(self):
         self.custom_root = tk.Toplevel()
-        self.custom_root.title('File changer')
+        self.custom_root.title("File changer")
 
         # Set in center
         screen_width = self.custom_root.winfo_screenwidth()
         screen_height = self.custom_root.winfo_screenheight()
         x = (screen_width - 200) // 2
         y = (screen_height - 200) // 2
-        self.custom_root.geometry(f'280x100+{x}+{y}')
+        self.custom_root.geometry(f"280x100+{x}+{y}")
         self.custom_root.resizable(False, False)
         self.paths = None
         self.create_widgets()
@@ -27,14 +27,16 @@ class NameDialog:
         self.__entry_path = tk.Entry(self.custom_root)
         self.__entry_path.grid(row=1, column=1)
 
-        self.__button_browse = tk.Button(self.custom_root, text="Browse", command=self.__select_folder)
+        self.__button_browse = tk.Button(
+            self.custom_root, text="Browse", command=self.__select_folder
+        )
         self.__button_browse.grid(row=1, column=2, padx=5)
 
-        self.__button_ok = tk.Button(self.custom_root, text='OK', command=self.on_ok)
+        self.__button_ok = tk.Button(self.custom_root, text="OK", command=self.on_ok)
         self.__button_ok.grid(row=2, column=1, pady=10)
 
     def __select_folder(self):
-        folder_path = filedialog.askdirectory(title='Select a folder')
+        folder_path = filedialog.askdirectory(title="Select a folder")
         if folder_path:
             self.__entry_path.delete(0, tk.END)
             self.__entry_path.insert(tk.END, folder_path)
@@ -44,17 +46,17 @@ class NameDialog:
         __folder_path = self.__entry_path.get()
 
         if not __name:
-            self.__show_error_dialog('Path Error', 'Please enter name format')
+            self.__show_error_dialog("Path Error", "Please enter name format")
             return
 
         if not __folder_path:
-            self.__show_error_dialog('Path Error', 'Please select folder of label')
+            self.__show_error_dialog("Path Error", "Please select folder of label")
             return
 
         self.paths = (__name, __folder_path)
         self.custom_root.destroy()
 
-    def __show_error_dialog(self, title:str, message:str):
+    def __show_error_dialog(self, title: str, message: str):
         messagebox.showerror(title, message)
 
     def run(self):

@@ -1,6 +1,5 @@
-from src.mvc.view import View
 from src.mvc.controller import Controller
-
+from src.mvc.view import View
 
 if __name__ == "__main__":
     INTERFACE = View()

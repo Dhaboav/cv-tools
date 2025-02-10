@@ -2,12 +2,11 @@
 
 <br />
 <div align="center">
-<h3 align="center">toolsCV</h3>
+<h3 align="center">App Dataset Manager</h3>
 
   <p align="center">
-    Repositori yang untuk membantu bidang kamera.
+    Repositori yang untuk membantu mengatur dataset (YOLO dan SSD) (Archived).
     <br />
-    <a href="https://github.com/Dhaboav/toolsCV/issues">Lapor Bug</a>
   </p>
 </div>
 
@@ -19,7 +18,7 @@ Struktur besar dari repositori:
 ├── src
 |   ├── etc (Properties)
 |   └── mvc (Architecture)
-|       └── termasuk file data.py
+| 
 |
 ├── .gitignore
 ├── app.py
@@ -31,8 +30,8 @@ Struktur besar dari repositori:
 ### Cara Pakai
 1. Klon repo dari github.
   ```git
-   git clone https://github.com/Dhaboav/toolsCV.git
+   git clone https://github.com/Dhaboav/app-dataset-manager.git
   ```
-2. Install `Python 3.9` dan `pip install -r requirements.txt`.
+2. Install `pip install -r requirements.txt`.
 3. Jalankan file `app.py`.
 <p align="right">(<a href="#readme-top">Kembali ke atas</a>)</p>
